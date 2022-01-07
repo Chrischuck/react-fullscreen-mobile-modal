@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import ModalContext from '../state'
 
-const Mobile = ({ children }) => {
+const Mobile: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const state = useContext(ModalContext)
 
   return (

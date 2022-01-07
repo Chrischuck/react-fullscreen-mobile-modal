@@ -10,7 +10,7 @@ import FocusTrap from 'focus-trap-react'
 
 import ModalContext from '../state'
 
-const Desktop = ({ children }) => {
+const Desktop: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const state = useContext(ModalContext)
   const overlayRef = useSpringRef()
   const overlayTransitions = useTransition(state.isOpen, {
@@ -47,10 +47,13 @@ const Desktop = ({ children }) => {
               item && (
                 <FocusTrap
                   focusTrapOptions={{
-                    allowOutsideClick: (event) => {
+                    allowOutsideClick: (
+                      event: MouseEvent | TouchEvent
+                    ): boolean => {
                       if (event.type === 'click') {
                         state.outsideClick(event)
                       }
+                      return true
                     },
                     preventScroll: true,
                   }}

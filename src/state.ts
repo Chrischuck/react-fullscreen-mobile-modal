@@ -3,7 +3,7 @@ import { CSSProperties, createContext } from 'react'
 interface State {
   isOpen: boolean
   overlay: boolean
-  outsideClick: () => void
+  outsideClick: (event?: MouseEvent | TouchEvent) => void
   overlayStyles: CSSProperties
   modalStyles: CSSProperties
   mobileStyles: CSSProperties

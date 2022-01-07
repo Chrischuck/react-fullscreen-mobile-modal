@@ -57,6 +57,7 @@
   },
   "dependencies": {
     "@react-spring/web": "^9.4.1",
+    "@types/styled-components": "^5.1.19",
     "focus-trap-react": "^8.9.0",
     "react-responsive": "^9.0.0-beta.5",
     "styled-components": "^5.3.3"
