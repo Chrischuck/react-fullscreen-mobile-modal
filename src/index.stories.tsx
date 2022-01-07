@@ -1,10 +1,21 @@
-import React from "react";
-import Modal from "./";
+import React, { useState } from 'react'
+import Modal from './'
 
 export default {
-  title: "Modal tests",
-};
+  title: 'Modal tests',
+}
 
-export const Test1 = () => <Modal>foo</Modal>;
+export const Test1 = () => {
+  const [isOpen, setIsOpen] = useState(false)
 
-export const Test2 = () => <Modal>foo</Modal>;
+  return (
+    <>
+      <button onClick={() => setIsOpen((o) => !o)}>Open modal</button>
+      <Modal isOpen={isOpen}>
+        foo <button onClick={() => setIsOpen(false)}>close</button>
+      </Modal>
+    </>
+  )
+}
+
+export const Test2 = () => <Modal>foo</Modal>
