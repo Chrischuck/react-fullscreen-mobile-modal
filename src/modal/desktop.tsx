@@ -6,13 +6,14 @@ import {
   useSpringRef,
   useChain,
 } from '@react-spring/web'
+import FocusTrap from 'focus-trap-react'
 
 import ModalContext from '../state'
 
 const Desktop = ({ children }) => {
   const state = useContext(ModalContext)
   const overlayRef = useSpringRef()
-  const overlayTransitions = useTransition(state.open, {
+  const overlayTransitions = useTransition(state.isOpen, {
     from: { opacity: 0 },
     enter: { opacity: 1 },
     leave: { opacity: 0 },
@@ -22,7 +23,7 @@ const Desktop = ({ children }) => {
     },
   })
   const modalRef = useSpringRef()
-  const modalTransitions = useTransition(state.open, {
+  const modalTransitions = useTransition(state.isOpen, {
     from: { opacity: 0, transform: 'translate(-50%, -52%)' },
     enter: { opacity: 1, transform: 'translate(-50%, -50%)' },
     leave: { opacity: 0, transform: 'translate(-50%, -52%)' },
@@ -32,10 +33,10 @@ const Desktop = ({ children }) => {
     },
   })
 
-  useChain(state.open ? [overlayRef, modalRef] : [modalRef, overlayRef])
+  useChain(state.isOpen ? [overlayRef, modalRef] : [modalRef, overlayRef])
 
   const Overlay = state.overlay ? BaseOverlay : React.Fragment
-  const overlayProps = state.overlay ? {} : {}
+  const overlayProps = state.overlay ? { style: state.overlayStyles } : {}
 
   return overlayTransitions(
     (styles, item) =>
@@ -43,7 +44,22 @@ const Desktop = ({ children }) => {
         <Overlay style={styles} {...overlayProps}>
           {modalTransitions(
             (styles, item) =>
-              item && <ModalContainer style={styles}>{children}</ModalContainer>
+              item && (
+                <FocusTrap
+                  focusTrapOptions={{
+                    allowOutsideClick: (event) => {
+                      if (event.type === 'click') {
+                        state.outsideClick(event)
+                      }
+                    },
+                    preventScroll: true,
+                  }}
+                >
+                  <ModalContainer style={{ ...styles, ...state.modalStyles }}>
+                    {children}
+                  </ModalContainer>
+                </FocusTrap>
+              )
           )}
         </Overlay>
       )

@@ -5,10 +5,26 @@ import Desktop from './modal/desktop'
 
 import ModalContext from './state'
 
-const Modal = ({
+interface Props {
+  isOpen: boolean
+  overlay?: boolean
+  breakpoint?: number
+  outsideClick?: () => void
+  mobileStyles?: React.CSSProperties
+  desktopStyles?: {
+    overlay?: React.CSSProperties
+    modal?: React.CSSProperties
+  }
+  children: React.ReactNode
+}
+
+const Modal: React.FC<Props> = ({
   isOpen = true,
   overlay = true,
   breakpoint = 300,
+  outsideClick = () => {},
+  mobileStyles = {},
+  desktopStyles = {},
   children,
 }) => {
   const showFullScreenModal = useMediaQuery({
@@ -20,7 +36,16 @@ const Modal = ({
   }
 
   return (
-    <ModalContext.Provider value={{ open: isOpen, overlay }}>
+    <ModalContext.Provider
+      value={{
+        isOpen,
+        overlay,
+        outsideClick,
+        mobileStyles,
+        overlayStyles: desktopStyles?.overlay ?? {},
+        modalStyles: desktopStyles?.modal ?? {},
+      }}
+    >
       {showFullScreenModal ? (
         <Mobile>{children}</Mobile>
       ) : (

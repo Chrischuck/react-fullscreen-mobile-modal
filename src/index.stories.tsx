@@ -11,7 +11,12 @@ export const Test1 = () => {
   return (
     <>
       <button onClick={() => setIsOpen((o) => !o)}>Open modal</button>
-      <Modal isOpen={isOpen}>
+      <Modal
+        isOpen={isOpen}
+        outsideClick={() => {
+          setIsOpen(false)
+        }}
+      >
         foo <button onClick={() => setIsOpen(false)}>close</button>
       </Modal>
     </>

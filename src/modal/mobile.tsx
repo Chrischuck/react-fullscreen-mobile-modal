@@ -1,8 +1,14 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import styled from 'styled-components'
 
+import ModalContext from '../state'
+
 const Mobile = ({ children }) => {
-  return <ModalWrapper>{children}</ModalWrapper>
+  const state = useContext(ModalContext)
+
+  return (
+    <ModalWrapper style={{ ...state.mobileStyles }}>{children}</ModalWrapper>
+  )
 }
 
 export default Mobile
