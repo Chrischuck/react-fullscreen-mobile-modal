@@ -6,12 +6,13 @@ import {
   useSpringRef,
   useChain,
 } from '@react-spring/web'
-import FocusTrap from 'focus-trap-react'
+import { useClickOutside } from '@mantine/hooks'
 
 import ModalContext from '../state'
 
 const Desktop: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const state = useContext(ModalContext)
+  const modal = useClickOutside(state.outsideClick)
   const overlayRef = useSpringRef()
   const overlayTransitions = useTransition(state.isOpen, {
     from: { opacity: 0 },
@@ -45,23 +46,12 @@ const Desktop: React.FC<{ children: React.ReactNode }> = ({ children }) => {
           {modalTransitions(
             (styles, item) =>
               item && (
-                <FocusTrap
-                  focusTrapOptions={{
-                    allowOutsideClick: (
-                      event: MouseEvent | TouchEvent
-                    ): boolean => {
-                      if (event.type === 'click') {
-                        state.outsideClick(event)
-                      }
-                      return true
-                    },
-                    preventScroll: true,
-                  }}
+                <ModalContainer
+                  ref={modal}
+                  style={{ ...styles, ...state.modalStyles }}
                 >
-                  <ModalContainer style={{ ...styles, ...state.modalStyles }}>
-                    {children}
-                  </ModalContainer>
-                </FocusTrap>
+                  {children}
+                </ModalContainer>
               )
           )}
         </Overlay>
@@ -81,8 +71,6 @@ const BaseOverlay = styled(animated.div)`
 `
 
 const ModalContainer = styled(animated.div)`
-  width: 300px;
-  height: 50%;
   background-color: white;
   position: absolute;
   top: 50%;
