@@ -1,7 +1,16 @@
-import React from "react";
+import React from 'react'
+import styled from 'styled-components'
 
-const Mobile = () => {
-  return <div>mobile</div>;
-};
+const Mobile = ({ children }) => {
+  return <ModalWrapper>{children}</ModalWrapper>
+}
 
-export default Mobile;
+export default Mobile
+
+const ModalWrapper = styled.div`
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+`

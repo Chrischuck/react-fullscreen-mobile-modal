@@ -58,6 +58,7 @@
   "dependencies": {
     "focus-trap-react": "^8.9.0",
     "react-motion": "^0.5.2",
-    "react-responsive": "^9.0.0-beta.5"
+    "react-responsive": "^9.0.0-beta.5",
+    "styled-components": "^5.3.3"
   }
 }
