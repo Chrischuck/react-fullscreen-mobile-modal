@@ -14,7 +14,7 @@ This library aims to solve that by turning the modal into full screen after a ce
 
 ## Demo
 
-![Demo](./demo.gif)
+![Demo](./modal-demo.gif)
 
 ## Props
 
