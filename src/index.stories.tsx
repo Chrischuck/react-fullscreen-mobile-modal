@@ -17,7 +17,10 @@ export const Test1 = () => {
           setIsOpen(false)
         }}
       >
-        foo <button onClick={() => setIsOpen(false)}>close</button>
+        <div style={{ height: 200, width: 330, padding: 10 }}>
+          Test
+          <button onClick={() => setIsOpen(false)}>close</button>
+        </div>
       </Modal>
     </>
   )
