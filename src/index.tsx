@@ -21,7 +21,7 @@ interface Props {
 const Modal: React.FC<Props> = ({
   isOpen = true,
   overlay = true,
-  breakpoint = 300,
+  breakpoint = 350,
   outsideClick = () => {},
   mobileStyles = {},
   desktopStyles = {},
