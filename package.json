@@ -9,7 +9,7 @@
   "types": "build/index.d.ts",
   "description": "Modal on desktop, full screen  on mobile",
   "scripts": {
-    "build": "rollup -c",
+    "build": "rm -rf ./build && rollup -c",
     "test": "jest",
     "test:watch": "jest --watch",
     "storybook": "start-storybook -p 6006",
@@ -27,6 +27,10 @@
   ],
   "author": "Chris Chuck",
   "license": "MIT",
+  "typings": "build/index.d.ts",
+  "typescript": {
+    "definition": "build/index.d.ts"
+  },
   "peerDependencies": {
     "react": ">=16.8.0",
     "react-dom": ">=16.8.0"

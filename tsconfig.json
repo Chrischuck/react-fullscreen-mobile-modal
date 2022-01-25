@@ -11,7 +11,10 @@
     "outDir": "./dist",
     "preserveConstEnums": true,
     "target": "es5",
-    "baseUrl": "./src"
+    "baseUrl": "./src",
+    "declaration": true,
+    "declarationDir": "build",
+    "strict": true
   },
   "paths": {
     "~/*": ["*"]
