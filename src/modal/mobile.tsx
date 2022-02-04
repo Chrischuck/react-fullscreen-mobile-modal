@@ -1,8 +1,8 @@
 import React, { useContext } from 'react'
 import { useSpring, animated } from '@react-spring/web'
-import styled from 'styled-components'
 
 import ModalContext from '../state'
+import styles from './mobile.module.css'
 
 const Mobile: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const state = useContext(ModalContext)
@@ -15,20 +15,13 @@ const Mobile: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   })
 
   return (
-    <ModalWrapper style={{ ...animation, ...state.mobileStyles }}>
+    <animated.div
+      className={styles.wrapper}
+      style={{ ...animation, ...state.mobileStyles }}
+    >
       {children}
-    </ModalWrapper>
+    </animated.div>
   )
 }
 
 export default Mobile
-
-const ModalWrapper = styled(animated.div)`
-  position: fixed;
-  background-color: white;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 1000;
-`

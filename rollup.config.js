@@ -21,10 +21,18 @@ export default {
     },
   ],
   plugins: [
+    postcss({
+      extract: false,
+      writeDefinitions: true,
+      modules: {
+        generateScopedName: 'rfsm-[hash:base64:8]',
+      },
+      namedExports: true,
+      minimize: true,
+    }),
     peerDepsExternal(),
     resolve(),
     commonjs(),
     typescript({ useTsconfigDeclarationDir: true, clean: true }),
-    postcss(),
   ],
 }

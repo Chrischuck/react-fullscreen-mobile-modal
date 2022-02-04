@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import styled from 'styled-components'
+
 import {
   useTransition,
   animated,
@@ -9,6 +9,7 @@ import {
 import { useClickOutside } from '@mantine/hooks'
 
 import ModalContext from '../state'
+import styles from './desktop.module.css'
 
 const Desktop: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const state = useContext(ModalContext)
@@ -36,22 +37,27 @@ const Desktop: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 
   useChain(state.isOpen ? [overlayRef, modalRef] : [modalRef, overlayRef])
 
-  const Overlay = state.overlay ? BaseOverlay : React.Fragment
+  const Overlay = state.overlay ? animated.div : React.Fragment
   const overlayProps = state.overlay ? { style: state.overlayStyles } : {}
 
   return overlayTransitions(
-    (styles, item) =>
+    (overlayStyles, item) =>
       item && (
-        <Overlay style={styles} {...overlayProps}>
+        <Overlay
+          className={styles.baseOverlay}
+          style={overlayStyles}
+          {...overlayProps}
+        >
           {modalTransitions(
-            (styles, item) =>
+            (transitionStyles, item) =>
               item && (
-                <ModalContainer
+                <animated.div
+                  className={styles.modalContainer}
                   ref={modal}
-                  style={{ ...styles, ...state.modalStyles }}
+                  style={{ ...transitionStyles, ...state.modalStyles }}
                 >
                   {children}
-                </ModalContainer>
+                </animated.div>
               )
           )}
         </Overlay>
@@ -60,20 +66,3 @@ const Desktop: React.FC<{ children: React.ReactNode }> = ({ children }) => {
 }
 
 export default Desktop
-
-const BaseOverlay = styled(animated.div)`
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.3);
-`
-
-const ModalContainer = styled(animated.div)`
-  background-color: white;
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  border-radius: 12px;
-`
