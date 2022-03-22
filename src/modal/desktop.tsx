@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-
 import { useClickOutside } from '@mantine/hooks'
 
 import ModalContext from '../state'

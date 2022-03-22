@@ -1,6 +1,6 @@
 {
   "name": "react-fullscreen-mobile-modal",
-  "version": "0.0.7",
+  "version": "0.0.8-rc.1",
   "main": "build/index.js",
   "module": "build/index.esm.js",
   "files": [
