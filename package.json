@@ -62,7 +62,8 @@
   },
   "dependencies": {
     "@mantine/hooks": "^3.5.2",
-    "@react-spring/web": "^9.4.1",
+    "@types/react-motion": "0.0.32",
+    "react-motion": "^0.5.2",
     "react-responsive": "^9.0.0-beta.5"
   }
 }
